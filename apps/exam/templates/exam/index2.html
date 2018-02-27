@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<h1> Hello, {{ user.name }} </h1>
+<h3 class="lead">Your Wish List</h3>
+<a href="/logout" style="float: right;
+padding-right: 60px;">Logout</a>
+<table style="width:700px;" class="table">
+	<tr>
+		<th>Item</th>
+		<th>Added By</th>
+		<th>Date Added</th>
+		<th>Action</th>
+	</tr>
+{% for i in my_likes %}
+<tr>
+	<td><a href="/item/{{ i.item.id }}">{{ i.item.new_item }}</a></td>
+	<td>{{ i.item.adder.name }}</td>
+	<td>{{ i.item.created_at}}</td>
+	<td>
+	{% if i.item.adder.id == request.session.id %}
+		<button class="btn btn-default"><a href="/delete/{{i.item.id}}">Delete</a></button>
+		{% elif not i.item.adder.id == request.session.id %}
+		<button class="btn btn-default"><a href="/remove/{{i.item.id}}">Remove from list</a></button>
+	{% endif %}
+
+	</td>
+
+</tr>
+{% endfor %}
+
+
+</table>
+
+
+
+<h3 class="lead">Other Users' Wish List</h3>
+<table style="width:800px;" class="table">
+	<tr>
+		<th>Item</th>
+		<th>Added By</th>
+		<th>Date Added</th>
+		<th>Action</th>
+	</tr>
+{% for j in all_likes %}
+<tr>
+	<td><a href="/item/{{j.id}}">{{ j.new_item }}</a></td>
+	<td>{{ j.adder.name }}</td>
+	<td>{{ j.created_at}}</td>
+	<td>
+	<button class="btn btn-default"><a href="/add/{{ j.id}}">Add to my wish list</a></button>
+	</td>
+
+</tr>
+{% endfor %}	
+</table>
+<button type="button" class="btn btn-info"><a href="/wish_items/create">Add a New Item</a></button>
+</body>
+</html>

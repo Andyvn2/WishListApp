@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Page</title>
+</head>
+<body>
+
+<a href="/dashboard" style="float: right;">Home</a> 
+<br>
+<a href="/dashboard" style="float: right;">Logout</a>
+
+<br>
+<h1>{{ the_item.new_item }}</h1>
+<br>
+<h2>Users who have this item in their WishList:</h2>
+<br>
+{% for i in this_item %}
+<br>
+{{ i.liked_by.name }}
+
+{% endfor %}
+
+</body>
+</html>
