@@ -8,10 +8,52 @@
 
 
 
+	{% if messages %}
+	<ul>
+		{% for message in messages %}
+		<li{% if message.tags%}>{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+
+
+
+
+<div>
+
+<h2>Register!</h2>
+
+
+<form class="register" action="/register" method="POST" role="form">
+	{% csrf_token %}
+	
+	Full Name <input type="text" name="new_name" placeholder="full name">
+	
+	<br>
+
+    UserName: <input type="text" name="new_username" placeholder="username">
+   <br>
+
+    Password: <input type="password" name="new_password" >
+ 	<br>
+
+    Confirm Password: <input type="password" name="confirm_password" >
+    <br>
+  
+    Date Hired : <input type="date" name="date">
+    <input type="submit" value="Register">
+<!-- 	<button><a href="/register" method="POST">Register</a></button>	 -->
+
+</form>
+
+
+
+
+</div>
 
 
 <h1>Login!</h1>
-	<form action="/login" method="POST">
+	<form class="login" action="/login" method="POST">
 	{% csrf_token %}
 	Username:<input type="text" name="login_username" >
 	<br>
@@ -23,40 +65,6 @@
 
 
 
-
-
-
-<h2>Register!</h2>
-
-	{% if messages %}
-	<ul>
-		{% for message in messages %}
-		<li{% if message.tags%}>{% endif %}>{{ message }}</li>
-		{% endfor %}
-	</ul>
-	{% endif %}
-<form action="/register" method="POST" role="form">
-	{% csrf_token %}
-	<div class="form-group">
-	Full Name <input type="text" name="new_name" placeholder="full name">
-	</div>
-	<br>
-	<div class="form-group">
-    UserName: <input type="text" name="new_username" placeholder="username">
-    </div><br>
-    <div class="form-group">
-    Password: <input type="password" name="new_password" >
-    </div><br>
-    <div class="form-group">
-    Confirm Password: <input type="password" name="confirm_password" >
-    </div><br>
-    <div class="form-group">
-    Date Hired : <input type="date" name="date">
-	</div>
-	<input type="submit" class="btn btn-default" value="Register">
-
-</form>
-	
 </body>
 </html>
 
